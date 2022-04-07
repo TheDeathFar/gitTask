@@ -1,0 +1,10 @@
+.Actions {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  padding: $padding-small-padding;
+
+  &-icon {
+    line-height: inherit;
+  }
+}

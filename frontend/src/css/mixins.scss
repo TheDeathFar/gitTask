@@ -1,0 +1,62 @@
+
+@mixin disable-chrome-autocomplete ($text-color, $font-family) {
+  input:-webkit-autofill {
+    &,
+    &::first-line,
+    &:hover,
+    &:focus,
+    &:active {
+      transition-delay: 9999s;
+      transition-property: background-color;
+
+      -webkit-text-fill-color: $text-color;
+      font-family: $font-family !important;
+      font-size: initial;
+    }
+  }
+}
+
+@mixin add-card-style () {
+  max-width: $width-large-width;
+
+  &-header {
+    display: flex;
+    align-items: center;
+  }
+
+  &-picture {
+    width: auto;
+    min-width: 80px;
+    height: 80px;
+    overflow: hidden;
+    margin-right: $margin-margin;
+    background-size: cover;
+    background-position: center;
+  }
+
+  &-info {
+    display: grid;
+    width: 100%;
+  }
+
+  &-title {
+    margin: 0;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &-category, &-location {
+    color: $global-muted-color;
+  }
+
+  &-meta {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &-body {
+    margin-top: $margin-margin;
+  }
+}

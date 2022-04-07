@@ -1,0 +1,60 @@
+version: "3.3"
+
+services:
+  backend:
+    image: backend_task2
+    container_name: backend_app
+    dockerfile: backend/backend.dockerfile
+    command: npm run start
+    environment:
+      MYSQL_HOST: "mysql_db"
+      JWT_SECRET_TOKEN: "your_secret_token_here"
+      CORS_ORIGIN_REGEX: "http([s])?://localhost:3002"
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mysql_db
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    image: frontend_task2
+    container_name: frontend_app
+    dockerfile: frontend/frontend.dockerfile
+    command: npm run start
+    enviroment:
+      SERVER_ORIGIN: "http://localhost:3001"
+    ports:
+      - "3002:3002"
+    depends_on:
+      - backend
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  mysql_db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: tradeoffer_db
+    volumes:
+      - ./mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  adminer:
+    image: adminer
+    restart: always
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: mysql
+      ADMINER_DEFAULT_SERVER: mysql_db
+      ADMINER_PLUGINS: tables-filter tinymce
+    ports:
+      - "30000:8080"
+    depends_on:
+      - mysql_db

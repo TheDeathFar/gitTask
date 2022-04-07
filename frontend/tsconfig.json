@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./temp-dist/",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "paths": {
+      "#domains/*": ["src/domains/*"],
+      "#src/*": ["src/*"],
+      "#client/*": ["*"],
+      "#server/*": ["../backend/*"],
+      "#components/*": ["src/components/*"],
+      "#redux/*": ["src/js/redux/*"]
+    },
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
+    "module": "ESNext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true
+  }
+}

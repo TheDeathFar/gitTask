@@ -1,0 +1,7 @@
+.BasketList {
+  height: 50%;
+
+  @media (min-width: $breakpoint-medium) {
+    height: 100%;
+  }
+}

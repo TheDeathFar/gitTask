@@ -1,0 +1,20 @@
+import { useAuthorizedOnly } from '#src/js/hooks/use-authorized-only';
+import { useSelector } from 'react-redux';
+import { userDataSelector } from '#redux/selectors';
+import { useEffect } from 'react';
+import { UserRole } from '#server/common/enums/user-role.enum';
+import { useHistory } from 'react-router-dom';
+
+export const useUserOnly = (): void => {
+  const history = useHistory();
+  const userData = useSelector(userDataSelector);
+
+  useAuthorizedOnly();
+
+  useEffect(() => {
+    if (userData?.role && userData.role !== UserRole.USER) {
+      history.replace(`/`);
+    }
+  }, [userData, history]);
+
+};

@@ -1,0 +1,10 @@
+.ItemActions {
+  margin-top: $margin-margin;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  & > :not(:first-child){
+    margin-left: $margin-small-margin;
+  }
+}
